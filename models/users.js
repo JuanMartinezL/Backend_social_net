@@ -1,31 +1,30 @@
-import { type } from "express/lib/response";
 import { Schema, model } from "mongoose";
-import mongoosePginate from "mongoose-paginate-v2";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const UserSchema = Schema({
     name: {
         type: String,
-        require: true
+        required: true
     },
     last_name: {
         type: String,
-        require: true
+        required: true
     },
     nick: {
         type: String,
-        require: true,
+        required: true,
         unique: true
     },
     email: {
         type: String,
-        require: true,
+        required: true,
         unique: true
     },
     bio: String,
 
     password: {
         type: String,
-        require: true,
+        required: true,
     },
     role: {
         type: String,
@@ -44,6 +43,6 @@ const UserSchema = Schema({
 
 //Configurar plugin de paginacionde mongo
 
-UserSchema.plugin(mongoosePaginate);
+UserSchema.plugin( mongoosePaginate);
 
 export default model("User", UserSchema, "users");
