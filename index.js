@@ -1,13 +1,15 @@
 // Importar dependencias (configurar en package.json)
 import express from "express";
-import dotenv from "dotenv";
-import connection from "./database/connection.js"
+import connection from "./database/connection.js";
+import cors from "cors";
+import bodyParser from "body-parser";
+import UserRoutes from "./routes/users.js";
+import PublicationRoutes from "./routes/publications.js";
+import FollowRoutes from "./routes/follows.js"
 
-// Configurar el dotenv para usar variables de entorno
-dotenv.config();
 
 // Mensaje de Bienvenida para verificare ejecutó la API de Node
-console.log("API Nde en ejecución");
+console.log("API Node en ejecución");
 
 // Usar la conexión a la Base de Datos
 connection();
@@ -17,6 +19,21 @@ const app = express();
 const puerto = process.env.PORT || 3900;
 
 // Configurar cors para que acepte peticiones del frontend
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}));
+
+// Decodificar los datos desde los formularios para convertirlos en objetos de JavaScript
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Configurar rutas del aplicativo (módulos)
+app.use('/api/user', UserRoutes);
+app.use('/api/publication', PublicationRoutes);
+app.use('/api/follow', FollowRoutes);
 
 // Configurar el servidor de Node
 app.listen(puerto, () => {
