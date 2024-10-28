@@ -2,6 +2,7 @@ import { Router } from "express";
 import { testFollow, saveFollow, unfollow, following, followers } from "../controllers/follow.js";
 import { ensureAuth } from "../middlewares/auth.js";
 
+
 const router = Router();
 
 // Definir las rutas
