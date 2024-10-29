@@ -285,4 +285,4 @@ export const feed = async (req, res) => {
       message: "Error al mostrar las publicaciones en el feed"
     });
   }
-}
+};
